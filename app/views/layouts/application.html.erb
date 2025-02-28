@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Da" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/4957713640.js" crossorigin="anonymous"></script>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+    <%= javascript_include_tag "turbo", type: "module" %>
+  </head>
+
+  <body>
+    <h1>device機能（カラム追加）、fontawesome実装、お気に入り機能表示</h1>
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
+    <p><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %></p>
+    <p><%= link_to "ログイン", new_user_session_path %></p>
+    <p><%= link_to "ユーザー新規登録", new_user_registration_path %></p>
+    <p><%= link_to "product一覧", products_path %></p>
+    <%= link_to "WEB", :webs_index %>
+<p>----------------------------------------------------------------------------</p>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <!-- Right Side Of Navbar -->
+      <ul class="navbar-nav ml-auto mr-5 mt-2">
+      <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+      <% if user_signed_in? %>
+        <li class="nav-item mr-5">
+          <%= link_to mypage_index_users_path, class: "nav-link" do %>
+            <i class="fas fa-user mr-1"></i><label>マイページ</label>
+          <% end %>
+        </li>
+       <li class="nav-item mr-5">
+         <%= link_to mypage_favorite_users_path, class: "nav-link" do %>
+           <i class="far fa-heart">お気に入りしたproduct</i>
+         <% end %>
+       </li>
+      <% else %>
+        <li class="nav-item mr-5">
+          <%= link_to new_user_registration_path, class: "nav-link" do %>
+            <label>新規登録</label>
+          <% end %>
+        </li>
+        <li class="nav-item mr-5">
+          <%= link_to login_path, class: "nav-link" do %>
+            <label>ログイン</label>
+          <% end %>
+        </li>
+        <hr>
+        <li class="nav-item mr-5">
+          <%= link_to login_path, class: "nav-link" do %><i class="far fa-heart"></i><% end %>
+        </li>
+        <li class="nav-item mr-5">
+          <%= link_to login_path, class: "nav-link" do %><i class="fas fa-shopping-cart"></i><% end %>
+        </li>
+      <% end %>
+    </div>
+
+    <%= yield %>
+  </body>
+</html>
