@@ -46,6 +46,9 @@ gem 'socialization'
 
 gem 'jquery-rails'
 
+# ショッピングカートを実装できる
+gem 'acts_as_shopping_cart'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

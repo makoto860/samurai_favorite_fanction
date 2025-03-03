@@ -25,51 +25,10 @@
   </head>
 
   <body>
-    <h1>device機能（カラム追加）、fontawesome実装、お気に入り機能表示</h1>
+    <h1>device機能（カラム追加）、fontawesome実装、お気に入り機能表示、カート機能実装</h1>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-    <p><%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete, turbo_confirm: "ログアウトしますか？" } %></p>
-    <p><%= link_to "ログイン", new_user_session_path %></p>
-    <p><%= link_to "ユーザー新規登録", new_user_registration_path %></p>
-    <p><%= link_to "product一覧", products_path %></p>
-    <%= link_to "WEB", :webs_index %>
-<p>----------------------------------------------------------------------------</p>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <!-- Right Side Of Navbar -->
-      <ul class="navbar-nav ml-auto mr-5 mt-2">
-      <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-      <% if user_signed_in? %>
-        <li class="nav-item mr-5">
-          <%= link_to mypage_index_users_path, class: "nav-link" do %>
-            <i class="fas fa-user mr-1"></i><label>マイページ</label>
-          <% end %>
-        </li>
-       <li class="nav-item mr-5">
-         <%= link_to mypage_favorite_users_path, class: "nav-link" do %>
-           <i class="far fa-heart">お気に入りしたproduct</i>
-         <% end %>
-       </li>
-      <% else %>
-        <li class="nav-item mr-5">
-          <%= link_to new_user_registration_path, class: "nav-link" do %>
-            <label>新規登録</label>
-          <% end %>
-        </li>
-        <li class="nav-item mr-5">
-          <%= link_to login_path, class: "nav-link" do %>
-            <label>ログイン</label>
-          <% end %>
-        </li>
-        <hr>
-        <li class="nav-item mr-5">
-          <%= link_to login_path, class: "nav-link" do %><i class="far fa-heart"></i><% end %>
-        </li>
-        <li class="nav-item mr-5">
-          <%= link_to login_path, class: "nav-link" do %><i class="fas fa-shopping-cart"></i><% end %>
-        </li>
-      <% end %>
-    </div>
-
+    <%= render partial: 'layouts/header' %>
     <%= yield %>
   </body>
 </html>
